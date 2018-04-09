@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:fragment="site-head">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <meta th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <meta th:name="_csrf_header" th:value="${_csrf.headerName}"/>
+        <meta th:name="_csrf_parameter" th:value="${_csrf.parameterName}"/>
+
+        <title>Kolkata Press Club Cooperative Housing Society Ltd.</title>
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <!-- Custom fonts for this template -->
+        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Plugin CSS -->
+        <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet"/>
+
+        <!-- Custom styles for this template -->
+        <link href="css/sb-admin.css" rel="stylesheet"/>
+
+        <!-- Custom styles for this template -->
+        <link href="vendor/bootstrap/css/daterangepicker.min.css" rel="stylesheet"/>
+    </head>
+</head>
+<nav th:fragment="site-nav">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href="#">Kolkata Press Club Cooperative Housing Society Ltd.</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="home.html" th:href="@{/home}">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Members">
+                    <a class="nav-link" href="member.html" th:href="@{/member}">
+                        <i class="fa fa-fw fa-user"></i>
+                        <span class="nav-link-text">Members</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Transactions">
+                    <a class="nav-link" href="account.html" th:href="@{/account}">
+                        <i class="fa fa-fw fa-money"></i>
+                        <span class="nav-link-text">Transactions</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <span sec:authorize="isAuthenticated()">
+                        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fa fa-fw fa-sign-out"></i> Logout
+                        </a>
+                    </span>
+                    <span sec:authorize="!isAuthenticated()">
+                        <a class="nav-link" th:href="@{/login}">
+                            <i class="fa fa-fw fa-sign-out"></i> Login
+                        </a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</nav>
+<nav th:fragment="site-nav-old">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+        </div>
+        <!-- /.navbar-header -->
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-messages">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>John Smith</strong>
+                                <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                            </div>
+                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>John Smith</strong>
+                                <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                            </div>
+                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>John Smith</strong>
+                                <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                            </div>
+                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>Read All Messages</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-tasks">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 1</strong>
+                                    <span class="pull-right text-muted">40% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                        <span class="sr-only">40% Complete (success)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 2</strong>
+                                    <span class="pull-right text-muted">20% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                        <span class="sr-only">20% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 3</strong>
+                                    <span class="pull-right text-muted">60% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                        <span class="sr-only">60% Complete (warning)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 4</strong>
+                                    <span class="pull-right text-muted">80% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                        <span class="sr-only">80% Complete (danger)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>See All Tasks</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-tasks -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-comment fa-fw"></i> New Comment
+                                <span class="pull-right text-muted small">4 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                <span class="pull-right text-muted small">12 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                <span class="pull-right text-muted small">4 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-tasks fa-fw"></i> New Task
+                                <span class="pull-right text-muted small">4 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                <span class="pull-right text-muted small">4 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>See All Alerts</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-alerts -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="sidebar-search">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search..."/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <!-- /input-group -->
+                    </li>
+                    <li>
+                        <a href="index.html" th:href="@{/}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="member.html" th:href="@{/member}"><i class="fa fa-user fa-fw"></i> Members</a>
+                    </li>
+                    <li>
+                        <a href="account.html" th:href="@{/account}"><i class="fa fa-money fa-fw"></i> Accounts</a>
+                    </li>
+                    <li>
+                        <a href="report.html" th:href="@{/report}"><i class="fa fa-bar-chart fa-fw"></i> Reports</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">Flot Charts</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Morris.js Charts</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                    </li>
+                    <li>
+                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="panels-wells.html">Panels and Wells</a>
+                            </li>
+                            <li>
+                                <a href="buttons.html">Buttons</a>
+                            </li>
+                            <li>
+                                <a href="notifications.html">Notifications</a>
+                            </li>
+                            <li>
+                                <a href="typography.html">Typography</a>
+                            </li>
+                            <li>
+                                <a href="icons.html"> Icons</a>
+                            </li>
+                            <li>
+                                <a href="grid.html">Grid</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Second Level Item</a>
+                            </li>
+                            <li>
+                                <a href="#">Second Level Item</a>
+                            </li>
+                            <li>
+                                <a href="#">Third Level <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="#">Third Level Item</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Item</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Item</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Item</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-third-level -->
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="blank.html">Blank Page</a>
+                            </li>
+                            <li>
+                                <a href="login.html">Login Page</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+</nav>
+<footer th:fragment="site-footer">
+    <!-- /.content-wrapper -->
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="text-center">
+                <small id="copyright"></small>
+            </div>
+        </div>
+    </footer>
+</footer>
+<modal-member th:fragment="site-modal-member">
+    <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal-header-success">
+                    <h6 class="modal-title" id="addMemberLabel">{{NG_MODE}} Member</h6>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="memberForm" name="memberForm" modelAttribute="memberVO"
+                      ng-submit="submitMember()" role="form">
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="title">Title</label>
+                                <select id="title" name="title"
+                                        class="form-control form-control-sm custom-select mb-2 mr-sm-2 mb-sm-0"
+                                        data-placeholder="Select title" ng-model="member.title"
+                                        ng-options="title.name for title in titles track by title.code"
+                                        required="required">
+                                    <option value="" selected="selected">Choose title</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4"
+                                 show-errors='{showSuccess: true}'>
+                                <label for="firstName">First Name</label>
+                                <input type="text"
+                                       class="form-control form-control-sm"
+                                       id="firstName"
+                                       name="firstName"
+                                       ng-model="member.firstName"
+                                       aria-describedby="nameHelp"
+                                       placeholder="Enter first name"
+                                       required="required"/>
+                                <label class="help-block" ng-if="memberForm.firstName.$error.required">First Name
+                                    is required.</label>
+                            </div>
+                            <div class="form-group col-md-4"
+                                 show-errors='{showSuccess: true}'>
+                                <label for="middleName">Middle Name</label>
+                                <input type="text"
+                                       class="form-control form-control-sm"
+                                       id="middleName"
+                                       name="middleName"
+                                       ng-model="member.middleName"
+                                       aria-describedby="nameHelp"
+                                       placeholder="Enter middle name"/>
+                            </div>
+                            <div class="form-group col-md-4"
+                                 show-errors='{showSuccess: true}'>
+                                <label for="lastName">Last Name</label>
+                                <input type="text"
+                                       class="form-control form-control-sm"
+                                       id="lastName"
+                                       name="lastName"
+                                       ng-model="member.lastName"
+                                       aria-describedby="nameHelp"
+                                       placeholder="Enter last name"
+                                       required="required"/>
+                                <label class="help-block" ng-if="memberForm.lastName.$error.required">Last Name
+                                    is required.</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <label for="gender">Gender</label>
+                                    <select id="gender"
+                                            name="gender"
+                                            class="form-control form-control-sm custom-select mb-2 mr-sm-2 mb-sm-0"
+                                            data-placeholder="Select gender"
+                                            ng-model="member.gender"
+                                            ng-options="gender.name for gender in genders track by gender.code"
+                                            required="required">
+                                        <option value="" selected="selected">Choose gender</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="birthdate">Date Of Birth</label>
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           id="birthDate"
+                                           name="birthDate"
+                                           ng-model="member.birthDate"
+                                           aria-describedby="birthDateHelp"
+                                           placeholder="DD/MM/YYYY"/>
+                                    <label class="help-block"
+                                           ng-if="memberForm.birthDate.$error.required">Birth
+                                        Date is required.</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="roomNo">Room No.</label>
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           id="roomNo" name="roomNo"
+                                           ng-model="member.roomNo"
+                                           aria-describedby="birthDateHelp"
+                                           required="required"/> <label
+                                        class="help-block"
+                                        ng-if="memberForm.roomNo.$error.required">Room No is
+                                    required.</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <label for="occupation">Occupation</label>
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           id="occupation" name="occupation"
+                                           ng-model="member.occupation"
+                                           aria-describedby="occupationHelp"
+                                           placeholder="Enter occupation"
+                                           required="required"/>
+                                    <label class="help-block" ng-if="memberForm.occupation.$error.required">Occupation
+                                        id is required.</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="email">Email address</label>
+                                    <input type="email"
+                                           class="form-control form-control-sm"
+                                           id="email" name="email"
+                                           ng-model="member.email"
+                                           aria-describedby="emailHelp"
+                                           placeholder="Enter email"
+                                           required="required"/>
+                                    <label class="help-block" ng-if="memberForm.email.$error.required">Email
+                                        id is required.</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="mobileNo">Mobile</label>
+                                    <input type="number"
+                                           class="form-control form-control-sm"
+                                           id="mobileNo"
+                                           name="mobileNo"
+                                           ng-model="member.mobileNo"
+                                           aria-describedby="emailHelp"
+                                           placeholder="Enter mobile no."/>
+                                    <label class="help-block" ng-if="memberForm.email.$error.required">Mobile no is
+                                        required.</label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>
+                        <h6>Alternative address</h6>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label for="address1" class="col-form-label">Address</label> <input
+                                        type="text" class="form-control form-control-sm" id="address1"
+                                        name="address1" ng-model="member.address1"
+                                        placeholder="1234 Main St" required="required"/>
+                                    <label class="help-block" ng-if="memberForm.address1.$error.required">Last
+                                        Name is required.</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="address2" class="col-form-label">Address 2</label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           id="address2" name="address2" ng-model="member.address2"
+                                           placeholder="Apartment, studio, or floor"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <label for="country" class="col-form-label">Country</label>
+                                    <select
+                                            id="country" name="country" ng-model="member.country"
+                                            ng-options="country.name for country in countries track by country.code"
+                                            ng-change="onChangeCountry(member.country.code)"
+                                            class="form-control form-control-sm custom-select mb-2 mr-sm-2 mb-sm-0"
+                                            required="required">
+                                        <option value="" selected="selected">Select country</option>
+                                    </select>
+                                    <label class="help-block" ng-if="memberForm.country.$error.required">Country is
+                                        required.</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="state" class="col-form-label">State *</label>
+                                    <select
+                                            id="state" name="state" ng-model="member.state"
+                                            ng-options="state.name for state in states track by state.code"
+                                            class="form-control form-control-sm custom-select mb-2 mr-sm-2 mb-sm-0"
+                                            required="required">
+                                        <option value="" selected="selected">Select state</option>
+                                    </select>
+                                    <label class="help-block" ng-if="memberForm.state.$error.required">State is
+                                        required.</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="city" class="col-form-label">City</label>
+                                    <input
+                                            type="text" class="form-control form-control-sm" id="city"
+                                            name="city" ng-model="member.city" required="required"/>
+                                    <label class="help-block" ng-if="memberForm.city.$error.required">City
+                                        is required.</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="zip" class="col-form-label">Pin Code*</label> <input
+                                        type="text" class="form-control form-control-sm" id="zip"
+                                        name="zip" ng-model="member.zip" required="required"/>
+                                    <label class="help-block" ng-if="memberForm.zip.$error.required">Pin
+                                        code is required.</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <label class="form-check-label"> <input
+                                        class="form-check-input form-control-sm" id="subscribe"
+                                        name="subscribe" ng-model="member.subscribe" type="checkbox"/>
+                                    Subscribe to monthly email statement.
+                                </label>
+                            </div>
+                        </div>
+                        <div class="member-message"></div>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <input type="hidden" name="memberId" id="memberId" ng-model="member.memberId"
+                               value="{{member.memberId}}"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger" ng-show="ShowSave" id="member-save-button"
+                                ng-disabled="memberForm.$invalid">
+                            <i class="fa fa-check" aria-hidden="true"></i> {{!member.memberId ? 'Add' : 'Update'}}
+                        </button>
+                        <button type="button" class="btn btn-info" ng-show="ShowReset" ng-click="reset()">
+                            <i class="fa fa-refresh" aria-hidden="true"></i> Reset
+                        </button>
+                        <button type="button" class="btn btn-secondary" ng-show="ShowCancel" id="member-cancel-button"
+                                data-dismiss="modal" ng-click="reset()">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</modal-member>
+<modal-transaction th:fragment="site-modal-transaction">
+    <div class="modal fade" id="addTransactionModal" tabindex="-1"
+         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal-header-success">
+                    <h6 class="modal-title" id="addtransactionLabel">
+                        {{NG_MODE}}
+                        Transaction</h6>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="transactionForm" name="transactionForm" modelAttribute="transactionVO"
+                      ng-submit="submitTransaction()" role="form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label for="transMode">Transaction Mode</label>
+                                    <select
+                                            id="transMode" name="transMode"
+                                            class="form-control form-control-sm custom-select mb-2 mr-sm-2 mb-sm-0"
+                                            data-placeholder="Select transMode"
+                                            ng-model="transaction.transMode"
+                                            ng-options="transMode.name for transMode in transModes track by transMode.code"
+                                            required="required">
+                                        <option value="" selected="selected">Select mode</option>
+                                    </select>
+                                    <label class="help-block" ng-if="transactionForm.transMode.$error.required">Transaction
+                                        mode is required.</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label for="title">Transaction Type</label>
+                                    <select
+                                            id="transType" name="transType"
+                                            class="form-control form-control-sm custom-select mb-2 mr-sm-2 mb-sm-0"
+                                            data-placeholder="Select transType"
+                                            ng-model="transaction.transType"
+                                            ng-options="transType.name for transType in transTypes track by transType.code"
+                                            ng-change="onChangeTransactionType(transaction.transType.code)"
+                                            required="required">
+                                        <option value="" selected="selected">Select type</option>
+                                    </select>
+                                    <label class="help-block" ng-if="transactionForm.transType.$error.required">Transaction
+                                        type is required.</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="transSelect">Transaction Selection</label>
+                                    <select
+                                            id="transSelect" name="transSelect"
+                                            class="form-control form-control-sm custom-select mb-2 mr-sm-2 mb-sm-0"
+                                            data-placeholder="Select transSelect"
+                                            ng-model="transaction.transSelect"
+                                            ng-options="transSelect.name for transSelect in transSelects track by transSelect.code"
+                                            required="required">
+                                        <option value="" selected="selected">Select selection</option>
+                                    </select>
+                                    <label class="help-block" ng-if="transactionForm.transSelect.$error.required">Transaction
+                                        selection is required.</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label for="transDate">Transaction Date</label> <input
+                                        type="text" class="form-control form-control-sm"
+                                        id="transDate" name="transDate" ng-model="transaction.transDate"
+                                        aria-describedby="transDateHelp" placeholder="DD/MM/YYYY"/>
+                                    <label class="help-block" ng-if="transactionForm.transDate.$error.required">Tranasction
+                                        Date is required.</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="amount">Amount (INR)</label>
+                                    <input type="number"
+                                           class="form-control form-control-sm" id="amount" name="amount"
+                                           ng-model="transaction.amount"
+                                           ng-pattern="/^\d+(?:\.\d\d?)?$/" step="0.01"
+                                           aria-describedby="birthDateHelp"
+                                           min="0"
+                                           required="required"/>
+                                    <label class="help-block"
+                                           ng-if="transactionForm.amount.$error.required">Transaction
+                                        amount is required.</label>
+                                    <label class="help-block"
+                                           ng-if="transactionForm.amount.$error.pattern">Amount is two decimal only.
+                                    </label>
+                                    <label class="help-block"
+                                           ng-if="transactionForm.amount.$error.number">Enter non-negative/valid amount
+                                        only.
+                                    </label>
+                                    <label ng-if="transactionForm.amount.$valid" class="help-block has-success">{{transaction.amount
+                                        | currency:"₹"}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <label for="description">Transaction Description</label>
+                                    <textarea class="form-control form-control-sm" rows="2" id="description"
+                                              name="description"
+                                              ng-model="transaction.description"
+                                              aria-describedby="descriptionHelp"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="transaction-message"></div>
+                        <input type="hidden" th:name="${_csrf.parameterName}"
+                               th:value="${_csrf.token}"/>
+                        <input type="hidden" name="transactionId" id="transactionId"
+                               ng-model="transaction.transactionId" value="{{transaction.transactionId}}"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger" ng-show="ShowSave"
+                                ng-disabled="transactionForm.$invalid">
+                            <i class="fa fa-check" aria-hidden="true"></i> {{!transaction.transactionId
+                            ? 'Add' : 'Update'}}
+                        </button>
+                        <button type="button" class="btn btn-info" ng-show="ShowSave" ng-click="reset()">
+                            <i class="fa fa-refresh" aria-hidden="true"></i> Reset
+                        </button>
+                        <button type="button" class="btn btn-secondary" ng-show="ShowCancel"
+                                data-dismiss="modal" ng-click="reset()">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</modal-transaction>
+<site-script th:fragment="site-script">
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <script src="vendor/datatables/extensions/Buttons/js/dataTables.buttons.min.js">
+    </script>
+    <script src="vendor/datatables/extensions/Buttons/js/buttons.flash.min.js">
+    </script>
+    <script src="vendor/datatables/extensions/Buttons/js/jszip.min.js">
+    </script>
+    <script src="vendor/datatables/extensions/Buttons/js/pdfmake.min.js">
+    </script>
+    <script src="vendor/datatables/extensions/Buttons/js/vfs_fonts.js">
+    </script>
+    <script src="vendor/datatables/extensions/Buttons/js/buttons.html5.min.js">
+    </script>
+    <script src="vendor/datatables/extensions/Buttons/js/buttons.print.min.js">
+    </script>
+    <script src="vendor/bootstrap/js/moment.min.js">
+    </script>
+    <script src="vendor/bootstrap/js/daterangepicker.min.js">
+    </script>
+    <!-- Angular JS -->
+    <script src="/vendor/angular/angular.js"></script>
+    <!-- ProjectAPP -->
+    <script src="/app/script.js"></script>
+    <!-- ProjectAPP -->
+    <!--<script src="/vendor/app/sports.js"></script>-->
+    <!-- Custom scripts for this template -->
+    <script src="js/sb-admin.js"></script>
+</site-script>
+
+</html>

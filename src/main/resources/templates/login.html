@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="layout :: site-head"></head>
+<body class="bg-dark" ng-app="app" ng-controller="LoginController">
+<div class="container">
+    <div class="card card-login mx-auto mt-5">
+        <div class="card-header">
+            Login
+        </div>
+        <div class="card-body">
+            <form action="/doLogin" method="post" id="loginForm" role="form" modelAttribute="userVO" name="loginForm"
+                  ng-submit="loginUser()" novalidate="novalidate">
+                <div class="form-group">
+                    <label for="userName">User name</label>
+                    <input type="text" class="form-control" id="userName" name="userName" aria-describedby="nameHelp"
+                           ng-model="user.userName"
+                           placeholder="Enter user name" required="required"/>
+                    <label class="help-block" ng-if="loginForm.userName.$error.required">User Name is
+                        required.</label>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                           ng-model="user.password"
+                           placeholder="Password" required="required"/>
+                    <label class="help-block" ng-if="loginForm.userName.$error.required">Password is
+                        required.</label>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input"/>
+                            Remember Password
+                        </label>
+                    </div>
+                </div>
+                <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    Invalid user name or password.
+                </div>
+                <div th:if="${param.logout}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    You have been logged out successfully.
+                </div>
+                <input
+                        type="hidden"
+                        th:name="${_csrf.parameterName}"
+                        th:value="${_csrf.token}"/>
+                <button type="submit" class="btn btn-primary btn-block" ng-disabled="loginForm.$invalid"> Login
+                </button>
+            </form>
+            <div class="text-center">
+                <a class="d-block small mt-3" th:href="@{/register}">Register an Account</a>
+                <a class="d-block small" th:href="@{/forgot-password}">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/popper/popper.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="vendor/datatables/jquery.dataTables.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+<script src="vendor/datatables/extensions/Buttons/js/dataTables.buttons.min.js">
+</script>
+<script src="vendor/datatables/extensions/Buttons/js/buttons.flash.min.js">
+</script>
+<script src="vendor/datatables/extensions/Buttons/js/jszip.min.js">
+</script>
+<script src="vendor/datatables/extensions/Buttons/js/pdfmake.min.js">
+</script>
+<script src="vendor/datatables/extensions/Buttons/js/vfs_fonts.js">
+</script>
+<script src="vendor/datatables/extensions/Buttons/js/buttons.html5.min.js">
+</script>
+<script src="vendor/datatables/extensions/Buttons/js/buttons.print.min.js">
+</script>
+<script src="vendor/bootstrap/js/moment.min.js">
+</script>
+<script src="vendor/bootstrap/js/daterangepicker.min.js">
+</script>
+<!-- Angular JS -->
+<script src="/vendor/angular/angular.js"></script>
+<!-- ProjectAPP -->
+<script src="/app/script.js"></script>
+<!-- ProjectAPP -->
+<!--<script src="/vendor/app/sports.js"></script>-->
+<!-- Custom scripts for this template -->
+<script src="js/sb-admin.js"></script>
+
+
+</body>
+
+</html>

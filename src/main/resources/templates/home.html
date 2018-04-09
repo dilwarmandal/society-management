@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout :: site-head"></head>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top" ng-app="app" ng-controller="HomeController">
+<nav th:replace="layout :: site-nav"></nav>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active">My Dashboard</li>
+        </ol>
+        <!-- Icon Cards -->
+        <div class="row">
+            <div class="col-xl-2 col-sm-6 mb-3">
+                <div class="card text-white bg-secondary o-hidden h-100">
+                    <div class="card-body">
+                        Total Members
+                        <div class="mr-2">
+                            <span class="h5">{{users}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-sm-6 mb-3">
+                <div class="card text-white bg-success o-hidden h-100">
+                    <div class="card-body">
+                        Total Earnings
+                        <div class="mr-2">
+                            <span class="h5">{{totalEarnings | currency:"₹"}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-sm-6 mb-3">
+                <div class="card text-white bg-danger  o-hidden h-100">
+                    <div class="card-body">
+                        Total Expenditure
+                        <div class="mr-2">
+                            <span class="h5">{{totalExpenditure | currency:"₹"}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-sm-6 mb-3">
+                <div class="card text-white bg-warning o-hidden h-100">
+                    <div class="card-body">
+                        Cash In Hand
+                        <div class="mr-2">
+                            <span class="h5">{{cashInHand | currency:"₹"}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-sm-6 mb-3">
+                <div class="card text-white bg-info o-hidden h-100">
+                    <div class="card-body">
+                        Amount In Bank
+                        <div class="mr-2">
+                            <span class="h5">{{cashInBank | currency:"₹" }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-sm-6 mb-3">
+                <div class="card text-white bg-primary o-hidden h-100">
+                    <div class="card-body">
+                        Available Balance
+                        <div class="mr-2">
+                            <span class="h5">{{(totalEarnings - totalExpenditure) | currency:"₹"}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Example Bar Chart Card -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fa fa-bar-chart"></i> Monthly Performance - {{ytdYear}}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-9 my-auto">
+                                <canvas id="myBarChart" width="100" height="50"></canvas>
+                            </div>
+                            <div class="col-sm-3 text-center my-auto">
+                                <div class="card card-inverse card-danger p-3 text-center">
+                                    <div class="h4 mb-0 text-danger">
+                                        <span>Report - {{ytdYear}}</span>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="h4 mb-0 text-primary">
+                                    <span id="earnings">{{ytdEarning | currency:"₹"}}</span>
+                                </div>
+                                <div class="small text-muted">{{ytdYear}} Earnings</div>
+                                <hr/>
+                                <div class="h4 mb-0 text-warning"><span>{{ytdExpenditure | currency:"₹"}}</span>
+                                </div>
+                                <div class="small text-muted">{{ytdYear}} Expenditure</div>
+                                <hr/>
+                                <div class="h4 mb-0 text-success">
+                                    <span>{{(ytdEarning - ytdExpenditure) | currency:"₹"}}</span>
+                                </div>
+                                <div class="small text-muted">{{ytdYear}} Available Capital</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer small text-muted">
+                        Last Updated {{lastUpdatedDate | date : 'dd/MM/yyyy hh:mm:ss a' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Area Chart Example -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-area-chart"></i> Monthly Capital Performance - {{ytdYear}}
+            </div>
+            <div class="card-body">
+                <canvas id="myAreaChart" width="100%" height="30"></canvas>
+            </div>
+            <div class="card-footer small text-muted">Last Updated {{lastUpdatedDate | date : 'dd/MM/yyyy hh:mm:ss a' }}
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /.content-wrapper -->
+<footer th:replace="layout :: site-footer"></footer>
+<!-- Scroll to Top Button -->
+<a class="scroll-to-top rounded" href="#page-top"> <i
+        class="fa fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready
+                to end your current session.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Cancel
+                </button>
+                <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<site-script th:replace="layout :: site-script"></site-script>
+</body>
+</html>
